@@ -1,5 +1,5 @@
 {
-    "name": "webzop/yii2-notifications",
+    "name": "douglassrs/yii2-notifications",
     "description": "Notifications module for Yii2",
     "type": "yii2-extension",
     "keywords": [
@@ -22,11 +22,11 @@
     },
     "autoload": {
         "psr-4": {
-            "webzop\\notifications\\": ""
+            "douglassrs\\notifications\\": ""
         }
     },
     "extra": {
-        "bootstrap": "webzop\\notifications\\Bootstrap"
+        "bootstrap": "douglassrs\\notifications\\Bootstrap"
     },
     "repositories": [
         {
