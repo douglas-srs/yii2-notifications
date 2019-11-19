@@ -1,12 +1,12 @@
 <?php
 
-namespace webzop\notifications\channels;
+namespace douglassrs\notifications\channels;
 
 use Yii;
 use yii\di\Instance;
 use yii\base\InvalidConfigException;
-use webzop\notifications\Channel;
-use webzop\notifications\Notification;
+use douglassrs\notifications\Channel;
+use douglassrs\notifications\Notification;
 
 class EmailChannel extends Channel
 {
