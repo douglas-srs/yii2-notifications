@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications;
+namespace douglassrs\notifications;
 
 use Yii;
 use yii\base\InvalidParamException;
