@@ -1,14 +1,14 @@
 <?php
 
-namespace webzop\notifications\controllers;
+namespace douglassrs\notifications\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\db\Query;
 use yii\data\Pagination;
 use yii\helpers\Url;
-use webzop\notifications\helpers\TimeElapsed;
-use webzop\notifications\widgets\Notifications;
+use douglassrs\notifications\helpers\TimeElapsed;
+use douglassrs\notifications\widgets\Notifications;
 
 class DefaultController extends Controller
 {
