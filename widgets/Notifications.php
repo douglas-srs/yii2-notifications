@@ -1,6 +1,6 @@
 <?php
 
-namespace webzop\notifications\widgets;
+namespace douglassrs\notifications\widgets;
 
 use Yii;
 use yii\helpers\Html;
@@ -8,7 +8,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 use yii\helpers\Json;
 use yii\db\Query;
-use webzop\notifications\NotificationsAsset;
+use douglassrs\notifications\NotificationsAsset;
 
 
 class Notifications extends \yii\base\Widget
