@@ -24,6 +24,8 @@ class EmailChannel extends Channel
      */
     public $mailer = 'mailer';
 
+    public $viewPath = '@dektrium/user/views/mail';
+
 
     /**
      * @inheritdoc
@@ -32,6 +34,8 @@ class EmailChannel extends Channel
     {
         parent::init();
         $this->mailer = Instance::ensure($this->mailer, 'yii\mail\MailerInterface');
+        $this->mailer->viewPath = $this->viewPath;
+        $this->mailer->getView()->theme = Yii::$app->view->theme;
     }
 
     /**
@@ -51,11 +55,18 @@ class EmailChannel extends Channel
      */
     protected function composeMessage($notification)
     {
-        if(empty($this->message['to'])){
-            throw new InvalidConfigException('The "to" option must be set in EmailChannel::message.');
+        if(empty($notification->getEmail())){
+            throw new InvalidConfigException('The "email" property must be set in $notification->email');
         }
-        $message = $this->mailer->compose();
+
+        if (!empty($notification->getEmailTemplate())){
+            $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $notification->getEmailParams());
+        } else {
+            $message = $this->mailer->compose();
+        }
+        
         Yii::configure($message, $this->message);
+        $message->setTo($notification->getEmail());
         $message->setSubject((string)$notification->getTitle());
         $message->setTextBody((string)$notification->getDescription());
         return $message;

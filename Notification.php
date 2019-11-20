@@ -15,7 +15,15 @@ abstract class Notification extends \yii\base\BaseObject
 {
     public $key;
 
-    public $userId = 0;
+    public $userId;
+
+    public $email;
+
+    public $emailTemplate;
+
+    public $emailParams = [];
+
+    public $iconClass = 'fa fa-flag text-sw';
 
     public $data = [];
 
@@ -103,6 +111,63 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public function setUserId($id){
         $this->userId = $id;
+        return $this;
+    }
+
+    /**
+     * Gets the Email
+     *
+     * @return array
+     */
+    public function getEmail(){
+        return $this->email;
+    }
+
+    /**
+     * Sets the Email
+     *
+     * @return self
+     */
+    public function setEmail($email){
+        $this->email = $email;
+        return $this;
+    }
+
+    /**
+     * Gets the Email Template
+     *
+     * @return array
+     */
+    public function getEmailTemplate(){
+        return $this->emailTemplate;
+    }
+
+    /**
+     * Sets the Email Template
+     *
+     * @return self
+     */
+    public function setEmailTemplate($emailTemplate){
+        $this->emailTemplate = $emailTemplate;
+        return $this;
+    }
+
+    /**
+     * Gets the Email Params
+     *
+     * @return array
+     */
+    public function getEmailParams(){
+        return $this->emailParams;
+    }
+
+    /**
+     * Sets the Email Params
+     *
+     * @return self
+     */
+    public function setEmailParams($emailParams){
+        $this->emailParams = $emailParams;
         return $this;
     }
 

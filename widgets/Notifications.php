@@ -14,7 +14,7 @@ use douglassrs\notifications\NotificationsAsset;
 class Notifications extends \yii\base\Widget
 {
 
-    public $options = ['class' => 'dropdown nav-notifications'];
+    public $options = ['class' => 'dropdown notifications-menu'];
 
     /**
      * @var string the HTML options for the item count tag. Key 'tag' might be used here for the tag name specification.
@@ -69,7 +69,7 @@ class Notifications extends \yii\base\Widget
     {
         $html  = Html::beginTag('li', $this->options);
         $html .= Html::beginTag('a', ['href' => '#', 'class' => 'dropdown-toggle', 'data-toggle' => 'dropdown']);
-        $html .= Html::tag('span', '', ['class' => 'glyphicon glyphicon-bell']);
+        $html .= Html::tag('span', '', ['class' => 'fa fa-bell-o']);
 
         $count = self::getCountUnseen();
         $countOptions = array_merge([
@@ -84,19 +84,21 @@ class Notifications extends \yii\base\Widget
         $html .= Html::tag($countTag, $count, $countOptions);
 
         $html .= Html::endTag('a');
-        $html .= Html::begintag('div', ['class' => 'dropdown-menu']);
-        $header = Html::a(Yii::t('modules/notifications', 'Mark all as read'), '#', ['class' => 'read-all pull-right']);
+        $html .= Html::begintag('ul', ['class' => 'dropdown-menu']);
+        $header = Html::a(Yii::t('modules/notifications', 'Mark all as read'), '#', ['class' => 'read-all pull-right', 'style' => 'padding: 0px 10px;']);
         $header .= Yii::t('modules/notifications', 'Notifications');
-        $html .= Html::tag('div', $header, ['class' => 'header']);
+        $html .= Html::tag('li', $header, ['class' => 'header']);
 
-        $html .= Html::begintag('div', ['class' => 'notifications-list']);
+        $html .= Html::begintag('li');
+        $html .= Html::begintag('ul', ['class' => 'notifications-list menu']);
         //$html .= Html::tag('div', '<span class="ajax-loader"></span>', ['class' => 'loading-row']);
         $html .= Html::tag('div', Html::tag('span', Yii::t('modules/notifications', 'There are no notifications to show'), ['style' => 'display: none;']), ['class' => 'empty-row']);
-        $html .= Html::endTag('div');
+        $html .= Html::endTag('ul');
+        $html .= Html::endTag('li');
 
         $footer = Html::a(Yii::t('modules/notifications', 'View all'), ['/notifications/default/index']);
-        $html .= Html::tag('div', $footer, ['class' => 'footer']);
-        $html .= Html::endTag('div');
+        $html .= Html::tag('li', $footer, ['class' => 'footer']);
+        $html .= Html::endTag('ul'); //dropdown-menu
         $html .= Html::endTag('li');
 
         return $html;

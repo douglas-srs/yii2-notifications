@@ -17,6 +17,7 @@ class ScreenChannel extends Channel
             'class' => strtolower(substr($className, strrpos($className, '\\')+1, -12)),
             'key' => $notification->key,
             'message' => (string)$notification->getTitle(),
+            'icon_class' => $notification->iconClass,
             'route' => serialize($notification->getRoute()),
             'user_id' => $notification->userId,
             'created_at' => $currTime,

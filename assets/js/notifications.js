@@ -26,15 +26,18 @@ var Notifications = (function(opts) {
      * @returns {jQuery|HTMLElement|*}
      */
     var renderRow = function (object) {
-        var html = '<div href="#" class="dropdown-item notification-item' + (object.read != '0' ? ' read' : '') + '"' +
-            ' data-id="' + object.id + '"' +
-            ' data-class="' + object.class + '"' +
-            ' data-key="' + object.key + '">' +
-            '<span class="icon"></span> '+
+        var html = '<li class="dropdown-item notification-item ' + (object.seen != '0' ? 'seen' : '') +'" data-id="' + object.id + '" data-class="' + object.class + '" data-key="' + object.key + '">' + 
+            '<a href="#">' +
+            '<div class="dropdown-item-wrap">' +
             '<span class="message">' + object.message + '</span>' +
-            '<small class="timeago">' + object.timeago + '</small>' +
+            '<div class="dropdown-item-time">' +
+            '<i class="' + object.icon_class + '"></i> '+
+            '<span class="timeago">' + object.timeago + '</span>' +
             '<span class="mark-read" data-toggle="tooltip" title="' + (object.read != '0' ? options.readLabel : options.markAsReadLabel) + '"></span>' +
-            '</div>';
+            '</div>' +
+            '</div>' +
+            '</a>' +
+            '</li>';
         return $(html);
     };
 
