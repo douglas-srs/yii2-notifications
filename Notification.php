@@ -13,8 +13,6 @@ use Yii;
  */
 abstract class Notification extends \yii\base\BaseObject
 {
-    public $key;
-
     public $userId;
 
     public $email;
@@ -35,8 +33,7 @@ abstract class Notification extends \yii\base\BaseObject
      * @return static the newly created Notification
      * @throws \Exception
      */
-    public static function create($key, $params = []){
-        $params['key'] = $key;
+    public static function create($params = []){
         return new static($params);
     }
 
@@ -49,31 +46,6 @@ abstract class Notification extends \yii\base\BaseObject
     public function shouldSend($channel)
     {
         return true;
-    }
-
-    /**
-     * Gets the notification title
-     *
-     * @return string
-     */
-    abstract public function getTitle();
-
-    /**
-     * Gets the notification description
-     *
-     * @return string|null
-     */
-    public function getDescription(){
-        return null;
-    }
-
-    /**
-     * Gets the notification route
-     *
-     * @return array|null
-     */
-    public function getRoute(){
-        return null;
     }
 
     /**
