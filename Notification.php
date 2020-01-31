@@ -73,17 +73,7 @@ abstract class Notification extends \yii\base\BaseObject
      * @return array
      */
     public function getUserId(){
-        return $this->userId;
-    }
-
-    /**
-     * Sets the UserId
-     *
-     * @return self
-     */
-    public function setUserId($id){
-        $this->userId = $id;
-        return $this;
+        return $this->user->id;
     }
 
     /**
@@ -92,17 +82,7 @@ abstract class Notification extends \yii\base\BaseObject
      * @return array
      */
     public function getEmail(){
-        return $this->email;
-    }
-
-    /**
-     * Sets the Email
-     *
-     * @return self
-     */
-    public function setEmail($email){
-        $this->email = $email;
-        return $this;
+        return $this->user->email;
     }
 
     /**
