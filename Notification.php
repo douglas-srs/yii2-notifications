@@ -13,9 +13,7 @@ use Yii;
  */
 abstract class Notification extends \yii\base\BaseObject
 {
-    public $userId;
-
-    public $email;
+    public $user;
 
     public $emailTemplate;
 
@@ -68,21 +66,22 @@ abstract class Notification extends \yii\base\BaseObject
     }
 
     /**
-     * Gets the UserId
+     * Gets the User
      *
-     * @return array
+     * @return User ActiveRecord
      */
-    public function getUserId(){
-        return $this->user->id;
+    public function getUser(){
+        return $this->user;
     }
 
     /**
-     * Gets the Email
+     * Sets the User
      *
-     * @return array
+     * @return self
      */
-    public function getEmail(){
-        return $this->user->email;
+    public function setUser($user){
+        $this->user = $user;
+        return $this;
     }
 
     /**
