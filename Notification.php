@@ -37,11 +37,11 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public static function create($params = []){
         if (isset($params['data']['public_notification'])){
-            $this->publicNotification = $params['data']['public_notification'];
+            $params['public_notification'] = $params['data']['public_notification'];
             unset($params['data']['public_notification']);
         }
         if (isset($params['data']['exclude_owner'])){
-            $this->excludeOwner = $params['data']['exclude_owner'];
+            $params['exclude_owner'] = $params['data']['exclude_owner'];
             unset($params['data']['exclude_owner']);
         }
         return new static($params);
