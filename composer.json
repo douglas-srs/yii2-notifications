@@ -1,5 +1,5 @@
 {
-    "name": "douglassrs/yii2-notifications",
+    "name": "soareseneves/yii2-notifications",
     "description": "Notifications module for Yii2",
     "type": "yii2-extension",
     "keywords": [
@@ -22,11 +22,11 @@
     },
     "autoload": {
         "psr-4": {
-            "douglassrs\\notifications\\": ""
+            "soareseneves\\notifications\\": ""
         }
     },
     "extra": {
-        "bootstrap": "douglassrs\\notifications\\Bootstrap"
+        "bootstrap": "soareseneves\\notifications\\Bootstrap"
     },
     "repositories": [
         {
