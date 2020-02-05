@@ -1,6 +1,6 @@
 <?php
 
-namespace douglassrs\notifications;
+namespace soareseneves\notifications;
 
 /**
  * notifications module bootstrap class.
@@ -17,7 +17,7 @@ class Bootstrap implements \yii\base\BootstrapInterface
             $app->i18n->translations['modules/notifications*'] = [
                 'class' => 'yii\i18n\PhpMessageSource',
                 'sourceLanguage' => 'en-US',
-                'basePath' => '@douglassrs/notifications/messages',
+                'basePath' => '@soareseneves/notifications/messages',
             ];
         }
     }
