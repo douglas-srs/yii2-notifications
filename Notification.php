@@ -17,6 +17,8 @@ abstract class Notification extends \yii\base\BaseObject
 
     public $publicNotification;
 
+    public $excludeOwner;
+
     public $emailTemplate;
 
     public $emailParams = [];
@@ -34,6 +36,14 @@ abstract class Notification extends \yii\base\BaseObject
      * @throws \Exception
      */
     public static function create($params = []){
+        if (isset($params['public_notification'])){
+            $this->publicNotification = $params['public_notification'];
+            unset($params['public_notification']);
+        }
+        if (isset($params['exclude_owner'])){
+            $this->excludeOwner = $params['exclude_owner'];
+            unset($params['exclude_owner']);
+        }
         return new static($params);
     }
 
@@ -89,7 +99,7 @@ abstract class Notification extends \yii\base\BaseObject
     /**
      * Gets the Privacy
      *
-     * @return Boolean
+     * @return Int
      */
     public function getPublicNotification(){
         return $this->publicNotification;
@@ -102,6 +112,25 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public function setPublicNotification($publicNotification){
         $this->publicNotification = $publicNotification;
+        return $this;
+    }
+
+    /**
+     * Gets Exclude Owner
+     *
+     * @return Int
+     */
+    public function getExcludeOwner(){
+        return $this->excludeOwner;
+    }
+
+    /**
+     * Sets Exclude Owner
+     *
+     * @return self
+     */
+    public function setExcludeOwner($excludeOwner){
+        $this->excludeOwner = $excludeOwner;
         return $this;
     }
 
