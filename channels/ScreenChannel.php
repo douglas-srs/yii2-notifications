@@ -1,10 +1,10 @@
 <?php
 
-namespace douglassrs\notifications\channels;
+namespace soareseneves\notifications\channels;
 
 use Yii;
-use douglassrs\notifications\Channel;
-use douglassrs\notifications\Notification;
+use soareseneves\notifications\Channel;
+use soareseneves\notifications\Notification;
 
 class ScreenChannel extends Channel
 {

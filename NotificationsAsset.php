@@ -1,6 +1,6 @@
 <?php
 
-namespace douglassrs\notifications;
+namespace soareseneves\notifications;
 
 use yii\web\AssetBundle;
 

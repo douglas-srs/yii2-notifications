@@ -1,14 +1,14 @@
 <?php
 
-namespace douglassrs\notifications\controllers;
+namespace soareseneves\notifications\controllers;
 
 use Yii;
 use yii\web\Controller;
 use yii\db\Query;
 use yii\data\Pagination;
 use yii\helpers\Url;
-use douglassrs\notifications\helpers\TimeElapsed;
-use douglassrs\notifications\widgets\Notifications;
+use soareseneves\notifications\helpers\TimeElapsed;
+use soareseneves\notifications\widgets\Notifications;
 
 class DefaultController extends Controller
 {

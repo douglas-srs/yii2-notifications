@@ -1,12 +1,12 @@
 <?php
 
-namespace douglassrs\notifications\channels;
+namespace soareseneves\notifications\channels;
 
 use Yii;
 use yii\di\Instance;
 use yii\base\InvalidConfigException;
-use douglassrs\notifications\Channel;
-use douglassrs\notifications\Notification;
+use soareseneves\notifications\Channel;
+use soareseneves\notifications\Notification;
 
 class EmailChannel extends Channel
 {

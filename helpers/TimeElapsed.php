@@ -1,6 +1,6 @@
 <?php
 
-namespace douglassrs\notifications\helpers;
+namespace soareseneves\notifications\helpers;
 
 use Yii;
 
