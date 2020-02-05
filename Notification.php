@@ -15,6 +15,8 @@ abstract class Notification extends \yii\base\BaseObject
 {
     public $user;
 
+    public $publicNotification;
+
     public $emailTemplate;
 
     public $emailParams = [];
@@ -81,6 +83,25 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public function setUser($user){
         $this->user = $user;
+        return $this;
+    }
+
+    /**
+     * Gets the Privacy
+     *
+     * @return Boolean
+     */
+    public function getPublicNotification(){
+        return $this->publicNotification;
+    }
+
+    /**
+     * Sets the Privacy
+     *
+     * @return self
+     */
+    public function setPublicNotification($publicNotification){
+        $this->publicNotification = $publicNotification;
         return $this;
     }
 
