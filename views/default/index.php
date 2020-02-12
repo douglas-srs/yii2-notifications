@@ -19,7 +19,7 @@ $this->title = Yii::t('modules/notifications', 'Notifications');
     <ul id="notifications-items">
         <?php if($notifications): ?>
         <?php foreach($notifications as $notif): ?>
-        <li class="notification-item<?php if($notif['read']): ?> read<?php endif; ?>" data-id="<?= $notif['id']; ?>">
+        <li class="notification-item<?php if($notif['read']): ?> read<?php endif; ?>" data-id="<?= $notif['id']; ?>" data-key="<?= $notif['users_notification_id']; ?>">
             <a href="<?= $notif['url'] ?>">
                 <i class="fa fa-comment"></i>
                 <span class="message"><?= Html::encode($notif['body']); ?></span>
