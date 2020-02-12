@@ -15,7 +15,7 @@ class ScreenChannel extends Channel
         $currTime = time();
         $notificationData = $notification->getData();
 
-        $db->createCommand()->insert('{{%notifications}}', [
+        $db->createCommand()->insert('{{%local_notifications}}', [
             'class' => strtolower(substr($className, strrpos($className, '\\')+1, -12)),
             'title' => $notificationData['title'],
             'body' => $notificationData['body'],

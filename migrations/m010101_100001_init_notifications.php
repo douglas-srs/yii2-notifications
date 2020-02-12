@@ -19,7 +19,7 @@ class m010101_100001_init_notifications extends Migration
         }
 
         // notifications
-        $this->createTable('{{%notifications}}', [
+        $this->createTable('{{%local_notifications}}', [
             'id' => $this->primaryKey(),
             'class' => $this->string(64)->notNull(),
             'title' => $this->string(60),
@@ -32,9 +32,9 @@ class m010101_100001_init_notifications extends Migration
             'users_notification_id' => $this->integer(11)->unsigned()->notNull(),
             'created_at' => $this->integer(11)->unsigned()->notNull()->defaultValue(0),
         ], $tableOptions);
-        $this->createIndex('index_2', '{{%notifications}}', ['user_id']);
-        $this->createIndex('index_3', '{{%notifications}}', ['created_at']);
-        $this->createIndex('index_4', '{{%notifications}}', ['seen']);
+        $this->createIndex('index_2', '{{%local_notifications}}', ['user_id']);
+        $this->createIndex('index_3', '{{%local_notifications}}', ['created_at']);
+        $this->createIndex('index_4', '{{%local_notifications}}', ['seen']);
 
     }
 
@@ -43,6 +43,6 @@ class m010101_100001_init_notifications extends Migration
      */
     public function down()
     {
-        $this->dropTable('{{%notifications}}');
+        $this->dropTable('{{%local_notifications}}');
     }
 }
