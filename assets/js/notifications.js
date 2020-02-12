@@ -57,7 +57,7 @@ var Notifications = (function(opts) {
                 }
 
                 $.each(data.list, function (index, object) {
-                    if(list.find('>div[data-id="' + object.id + '"]').length){
+                    if(list.find('>li[data-id="' + object.id + '"]').length){
                         return;
                     }
 
