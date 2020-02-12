@@ -26,10 +26,10 @@ var Notifications = (function(opts) {
      * @returns {jQuery|HTMLElement|*}
      */
     var renderRow = function (object) {
-        var html = '<li class="dropdown-item notification-item ' + (object.seen != '0' ? 'seen' : '') +'" data-id="' + object.id + '" data-class="' + object.class + '" data-key="' + object.key + '">' + 
+        var html = '<li class="dropdown-item notification-item ' + (object.seen != '0' ? 'seen' : '') +'" data-id="' + object.id + '" data-class="' + object.class + '">' + 
             '<a href="#">' +
             '<div class="dropdown-item-wrap">' +
-            '<span class="message">' + object.message + '</span>' +
+            '<span class="message">' + object.body + '</span>' +
             '<div class="dropdown-item-time">' +
             '<i class="' + object.icon_class + '"></i> '+
             '<span class="timeago">' + object.timeago + '</span>' +
