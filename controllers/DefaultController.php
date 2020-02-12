@@ -109,7 +109,7 @@ class DefaultController extends Controller
                 $seen[] = $notif['id'];
             }
             $clickAction = $notif['click_action'];
-            $notif['url'] = !empty($clickAction) ? \Yii::$app->urlManager->createAbsoluteUrl(json_decode($clickAction, 'https') : '';
+            $notif['url'] = !empty($clickAction) ? \Yii::$app->urlManager->createAbsoluteUrl(json_decode($clickAction, 'https')) : '';
             $notif['timeago'] = TimeElapsed::timeElapsed($notif['created_at']);
             $notifs[] = $notif;
         }
