@@ -29,7 +29,8 @@ var Notifications = (function(opts) {
         var html = '<li class="dropdown-item notification-item ' + (object.seen != '0' ? 'seen' : '') +'" data-id="' + object.id + '" data-class="' + object.class + '"' + ' data-key="' + object.users_notification_id + '">' + 
             '<a href="#">' +
             '<div class="dropdown-item-wrap">' +
-            '<span class="message">' + object.body + '</span>' +
+            '<span class="message-title">' + object.title + '</span>' +
+            '<span class="message-body">' + object.body + '</span>' +
             '<div class="dropdown-item-time">' +
             '<i class="' + object.icon_class + '"></i> '+
             '<span class="timeago">' + object.timeago + '</span>' +

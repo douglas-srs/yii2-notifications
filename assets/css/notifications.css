@@ -39,7 +39,17 @@
 .notification-item.seen:hover .mark-read {
     background-color: #bcbcbc;
 }
-.message {
+.message-title {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 3em;
+    white-space: normal;
+    font-weight: bold;
+    font-size: 12px;
+}
+.message-body {
     overflow: hidden;
     display: -webkit-box;
     -webkit-line-clamp: 2;
