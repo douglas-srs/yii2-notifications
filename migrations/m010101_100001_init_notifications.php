@@ -22,13 +22,14 @@ class m010101_100001_init_notifications extends Migration
         $this->createTable('{{%notifications}}', [
             'id' => $this->primaryKey(),
             'class' => $this->string(64)->notNull(),
-            'key' => $this->string(32)->notNull(),
-            'message' => $this->string(255)->notNull(),
+            'title' => $this->string(60),
+            'body' => $this->string(255)->notNull(),
             'icon_class' => $this->string(60)->notNull()->defaultValue('fa fa-flag text-sw'),
-            'route' => $this->string(255)->notNull(),
+            'click_action' => $this->string(255)->notNull(),
             'seen' => $this->boolean()->notNull()->defaultValue(false),
             'read' => $this->boolean()->notNull()->defaultValue(false),
             'user_id' => $this->integer(11)->unsigned()->notNull(),
+            'users_notification_id' => $this->integer(11)->unsigned()->notNull(),
             'created_at' => $this->integer(11)->unsigned()->notNull()->defaultValue(0),
         ], $tableOptions);
         $this->createIndex('index_2', '{{%notifications}}', ['user_id']);

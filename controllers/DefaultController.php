@@ -108,8 +108,8 @@ class DefaultController extends Controller
             if(!$notif['seen']){
                 $seen[] = $notif['id'];
             }
-            $route = @unserialize($notif['route']);
-            $notif['url'] = !empty($route) ? Url::to($route) : '';
+            $clickAction = $notif['click_action'];
+            $notif['url'] = !empty($clickAction) ? \Yii::$app->urlManager->createAbsoluteUrl(json_decode($clickAction, 'https') : '';
             $notif['timeago'] = TimeElapsed::timeElapsed($notif['created_at']);
             $notifs[] = $notif;
         }

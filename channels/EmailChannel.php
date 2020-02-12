@@ -55,7 +55,7 @@ class EmailChannel extends Channel
      */
     protected function composeMessage($notification)
     {
-        if(empty($notification->getEmail())){
+        if(empty($notification->user->email)){
             throw new InvalidConfigException('The "email" property must be set in $notification->email');
         }
 
@@ -66,9 +66,12 @@ class EmailChannel extends Channel
         }
         
         Yii::configure($message, $this->message);
-        $message->setTo($notification->getEmail());
-        $message->setSubject((string)$notification->getTitle());
-        $message->setTextBody((string)$notification->getDescription());
+
+        $notificationData = $notification->getData();
+
+        $message->setTo($notification->user->email);
+        $message->setSubject($notificationData['title']);
+        $message->setTextBody($notificationData['body']);
         return $message;
     }
 }
