@@ -17,6 +17,8 @@ abstract class Notification extends \yii\base\BaseObject
 
     public $publicNotification;
 
+    public $userPermission;
+
     public $excludeOwner;
 
     public $emailTemplate;
@@ -39,6 +41,10 @@ abstract class Notification extends \yii\base\BaseObject
         if (isset($params['data']['public_notification'])){
             $params['publicNotification'] = $params['data']['public_notification'];
             unset($params['data']['public_notification']);
+        }
+        if (isset($params['data']['user_permission'])){
+            $params['userPermission'] = $params['data']['user_permission'];
+            unset($params['data']['user_permission']);
         }
         if (isset($params['data']['exclude_owner'])){
             $params['excludeOwner'] = $params['data']['exclude_owner'];
@@ -112,6 +118,25 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public function setPublicNotification($publicNotification){
         $this->publicNotification = $publicNotification;
+        return $this;
+    }
+
+    /**
+     * Gets the Permission
+     *
+     * @return Int
+     */
+    public function getUserPermission(){
+        return $this->userPermission;
+    }
+
+    /**
+     * Sets the Permission
+     *
+     * @return self
+     */
+    public function setUserPermission($userPermission){
+        $this->userPermission = $userPermission;
         return $this;
     }
 
