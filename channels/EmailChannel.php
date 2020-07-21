@@ -45,25 +45,26 @@ class EmailChannel extends Channel
     {
 
         $user_ids = $this->recipients($notification);
+        $fromUser = $notification->user;
 
         foreach ($user_ids as $user_id) {
-            $user = User::find($user_id)->one;
+            $toUser = User::find($user_id)->one;
 
             $emailParams = $notification->getEmailParams();
 
             if (isset($emailParams)){
                 if (is_array($emailParams)){
-                    $emailParams = array_merge($emailParams, ['user' => $user, 'data' => (object)$notification->getData()]);
+                    $emailParams = array_merge($emailParams, ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => (object)$notification->getData()]);
                 }
             } else {
-                $emailParams = ['user' => $user, 'data' => (object)$notification->getData()];
+                $emailParams = ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => (object)$notification->getData()];
             }
 
             $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $emailParams);
 
             Yii::configure($message, $this->message);
 
-            $message->setTo($user->email);
+            $message->setTo($toUser->email);
             $message->setSubject($notificationData['title']);
             $message->setTextBody($notificationData['body']);
             $message->send($this->mailer);
