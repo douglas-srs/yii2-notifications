@@ -48,6 +48,7 @@ class EmailChannel extends Channel
 
         if (!is_null($user_ids)){
             $fromUser = $notification->user;
+            $notificationData = $notification->getData();
 
             foreach ($user_ids as $user_id) {
                 $toUser = User::findOne($user_id);
