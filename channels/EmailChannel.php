@@ -43,35 +43,32 @@ class EmailChannel extends Channel
      */
     public function send(Notification $notification)
     {
-        $message = $this->composeMessage($notification);
-        $message->send($this->mailer);
-    }
 
-    /**
-     * Composes a mail message with the given body content.
-     * @param \webzop\notifications\Notification $notification the body content
-     * @return \yii\mail\MessageInterface $message
-     * @throws InvalidConfigException
-     */
-    protected function composeMessage($notification)
-    {
-        if(empty($notification->user->email)){
-            throw new InvalidConfigException('The "email" property must be set in $notification->email');
+        $user_ids = $this->recipients($notification);
+
+        foreach ($user_ids as $user_id) {
+            $user = User::find($user_id)->one;
+
+            $emailParams = $notification->getEmailParams();
+
+            if (isset($emailParams)){
+                if (is_array($emailParams)){
+                    $emailParams = array_merge($emailParams, ['user' => $user, 'data' => (object)$notification->getData()]);
+                }
+            } else {
+                $emailParams = ['user' => $user, 'data' => (object)$notification->getData()];
+            }
+
+            $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $emailParams);
+
+            Yii::configure($message, $this->message);
+
+            $message->setTo($user->email);
+            $message->setSubject($notificationData['title']);
+            $message->setTextBody($notificationData['body']);
+            $message->send($this->mailer);
         }
 
-        if (!empty($notification->getEmailTemplate())){
-            $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $notification->getEmailParams());
-        } else {
-            $message = $this->mailer->compose();
-        }
-        
-        Yii::configure($message, $this->message);
-
-        $notificationData = $notification->getData();
-
-        $message->setTo($notification->user->email);
-        $message->setSubject($notificationData['title']);
-        $message->setTextBody($notificationData['body']);
-        return $message;
     }
+
 }

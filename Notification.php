@@ -21,6 +21,8 @@ abstract class Notification extends \yii\base\BaseObject
 
     public $excludeOwner;
 
+    public $content;
+
     public $emailTemplate;
 
     public $emailParams = [];
@@ -49,6 +51,10 @@ abstract class Notification extends \yii\base\BaseObject
         if (isset($params['data']['exclude_owner'])){
             $params['excludeOwner'] = $params['data']['exclude_owner'];
             unset($params['data']['exclude_owner']);
+        }
+        if (isset($params['data']['content'])){
+            $params['content'] = $params['data']['content'];
+            unset($params['data']['content']);
         }
         return new static($params);
     }
@@ -156,6 +162,25 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public function setExcludeOwner($excludeOwner){
         $this->excludeOwner = $excludeOwner;
+        return $this;
+    }
+
+    /**
+     * Gets the Content
+     *
+     * @return Int
+     */
+    public function getContent(){
+        return $this->content;
+    }
+
+    /**
+     * Sets the Content
+     *
+     * @return self
+     */
+    public function setContent($content){
+        $this->content = $content;
         return $this;
     }
 
