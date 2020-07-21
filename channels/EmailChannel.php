@@ -57,10 +57,10 @@ class EmailChannel extends Channel
 
                 if (isset($emailParams)){
                     if (is_array($emailParams)){
-                        $emailParams = array_merge($emailParams, ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => (object)$notification->getData()]);
+                        $emailParams = array_merge($emailParams, ['toUser' => $toUser, 'fromUser' => $fromUser, 'content' => $notification->getContent()]);
                     }
                 } else {
-                    $emailParams = ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => (object)$notification->getData()];
+                    $emailParams = ['toUser' => $toUser, 'fromUser' => $fromUser, 'content' => $notification->getContent()];
                 }
 
                 $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $emailParams);
