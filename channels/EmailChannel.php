@@ -7,6 +7,7 @@ use yii\di\Instance;
 use yii\base\InvalidConfigException;
 use soareseneves\notifications\Channel;
 use soareseneves\notifications\Notification;
+use app\models\User;
 
 class EmailChannel extends Channel
 {
