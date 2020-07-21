@@ -55,12 +55,15 @@ class EmailChannel extends Channel
 
                 $emailParams = $notification->getEmailParams();
 
+                $modelClass = "app\\models\\" . ucfirst($notificationData['table_name']);
+                $model = $modelClass::find()->where(['id' => $notificationData['table_id']])->one();
+
                 if (isset($emailParams)){
                     if (is_array($emailParams)){
-                        $emailParams = array_merge($emailParams, ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => $notificationData]);
+                        $emailParams = array_merge($emailParams, ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => $notificationData, 'model' => $model]);
                     }
                 } else {
-                    $emailParams = ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => $notificationData];
+                    $emailParams = ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => $notificationData, 'model' => $model];
                 }
 
                 $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $emailParams);
