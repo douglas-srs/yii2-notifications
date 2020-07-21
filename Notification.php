@@ -23,6 +23,8 @@ abstract class Notification extends \yii\base\BaseObject
 
     public $content;
 
+    public $eventClass;
+
     public $emailTemplate;
 
     public $emailParams = [];
@@ -55,6 +57,10 @@ abstract class Notification extends \yii\base\BaseObject
         if (isset($params['data']['content'])){
             $params['content'] = $params['data']['content'];
             unset($params['data']['content']);
+        }
+        if (isset($params['data']['event_class'])){
+            $params['eventClass'] = $params['data']['event_class'];
+            unset($params['data']['event_class']);
         }
         return new static($params);
     }
@@ -181,6 +187,25 @@ abstract class Notification extends \yii\base\BaseObject
      */
     public function setContent($content){
         $this->content = $content;
+        return $this;
+    }
+
+    /**
+     * Gets the Event Class
+     *
+     * @return Int
+     */
+    public function getEventClass(){
+        return $this->eventClass;
+    }
+
+    /**
+     * Sets the Event Class
+     *
+     * @return self
+     */
+    public function setEventClass($eventClass){
+        $this->eventClass = $eventClass;
         return $this;
     }
 
