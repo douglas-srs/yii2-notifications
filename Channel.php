@@ -58,7 +58,7 @@ abstract class Channel extends \yii\base\BaseObject
 						}
 
 						if (!$user_ids)
-							$user_ids = [0, 0];
+							$user_ids = null;
 
 						return $user_ids;
 					} else {
@@ -78,7 +78,7 @@ abstract class Channel extends \yii\base\BaseObject
 						}
 
 						if (!$user_ids)
-							$user_ids = [0, 0];
+							$user_ids = null;
 
 						return $user_ids;
 					}
@@ -98,7 +98,7 @@ abstract class Channel extends \yii\base\BaseObject
 				}
 
 				if (!$user_ids)
-					$user_ids = [0, 0];
+					$user_ids = null;
 
 		        return $user_ids;
 			}	        
@@ -131,7 +131,7 @@ abstract class Channel extends \yii\base\BaseObject
 							}
 
 							if (!$user_ids)
-								$user_ids = [0, 0];
+								$user_ids = null;
 
 							return $user_ids;
 						} else {

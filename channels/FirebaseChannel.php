@@ -24,26 +24,29 @@ class FirebaseChannel extends Channel
 
         $user_ids = $this->recipients($notification);
 
-        $tokens = Token::find()->andFilterwhere([
-				            'and',
-				            ['in', 'user_id', $user_ids],
-				            ['=', 'type', '4']
-				        ])->asArray()->all();
+        if (!is_null($user_ids)){
+            $tokens = Token::find()->andFilterwhere([
+                            'and',
+                            ['in', 'user_id', $user_ids],
+                            ['=', 'type', '4']
+                        ])->asArray()->all();
 
-        $tokens = ArrayHelper::getColumn($tokens, 'code');
+            $tokens = ArrayHelper::getColumn($tokens, 'code');
 
-        $notificationData = $notification->getData();
+            $notificationData = $notification->getData();
 
-        $notificationData['notification_id'] = $notificationData['id'];
-        unset($notificationData['id']);
-        unset($notificationData['table_name']);
-        unset($notificationData['table_id']);
-        unset($notificationData['scheduled_date']);
-        unset($notificationData['content']);
+            $notificationData['notification_id'] = $notificationData['id'];
+            unset($notificationData['id']);
+            unset($notificationData['table_name']);
+            unset($notificationData['table_id']);
+            unset($notificationData['scheduled_date']);
+            unset($notificationData['content']);
 
-        $notificationData['url'] = \Yii::$app->urlManager->createAbsoluteUrl(json_decode($notificationData['click_action'], 'https'));
+            $notificationData['url'] = \Yii::$app->urlManager->createAbsoluteUrl(json_decode($notificationData['click_action'], 'https'));
 
-        $service->sendNotification($tokens, ['notification' => $notificationData, 'data' => $notificationData]);
+            $service->sendNotification($tokens, ['notification' => $notificationData, 'data' => $notificationData]);
+        }
+
     }
 
 }

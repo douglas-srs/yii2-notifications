@@ -17,17 +17,21 @@ class ScreenChannel extends Channel
 
         $user_ids = $this->recipients($notification);
 
-        foreach ($user_ids as $user_id) {
-            $db->createCommand()->insert('{{%local_notifications}}', [
-                'class' => strtolower(substr($className, strrpos($className, '\\')+1, -12)),
-                'title' => $notificationData['title'],
-                'body' => $notificationData['body'],
-                'icon_class' => $notification->iconClass,
-                'click_action' => $notificationData['click_action'],
-                'user_id' => $user_id,
-                'users_notification_id' => $notificationData['id'],
-                'created_at' => $currTime,
-            ])->execute();
+        if (!is_null($user_ids)){
+
+            foreach ($user_ids as $user_id) {
+                $db->createCommand()->insert('{{%local_notifications}}', [
+                    'class' => strtolower(substr($className, strrpos($className, '\\')+1, -12)),
+                    'title' => $notificationData['title'],
+                    'body' => $notificationData['body'],
+                    'icon_class' => $notification->iconClass,
+                    'click_action' => $notificationData['click_action'],
+                    'user_id' => $user_id,
+                    'users_notification_id' => $notificationData['id'],
+                    'created_at' => $currTime,
+                ])->execute();
+            }
+
         }
     }
 
