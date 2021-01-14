@@ -4,6 +4,7 @@ namespace soareseneves\notifications;
 
 use Yii;
 use app\models\User;
+use app\models\Membros;
 use yii\helpers\ArrayHelper;
 
 abstract class Channel extends \yii\base\BaseObject
@@ -58,7 +59,7 @@ abstract class Channel extends \yii\base\BaseObject
 						}
 
 						if (!$user_ids)
-							$user_ids = null;
+							$user_ids = [0, 0];
 
 						return $user_ids;
 					} else {
@@ -78,7 +79,7 @@ abstract class Channel extends \yii\base\BaseObject
 						}
 
 						if (!$user_ids)
-							$user_ids = null;
+							$user_ids = [0, 0];
 
 						return $user_ids;
 					}
@@ -98,7 +99,7 @@ abstract class Channel extends \yii\base\BaseObject
 				}
 
 				if (!$user_ids)
-					$user_ids = null;
+					$user_ids = [0, 0];
 
 		        return $user_ids;
 			}	        
@@ -131,7 +132,7 @@ abstract class Channel extends \yii\base\BaseObject
 							}
 
 							if (!$user_ids)
-								$user_ids = null;
+								$user_ids = [0, 0];
 
 							return $user_ids;
 						} else {
