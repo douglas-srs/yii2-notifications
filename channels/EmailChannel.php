@@ -7,7 +7,6 @@ use yii\di\Instance;
 use yii\base\InvalidConfigException;
 use soareseneves\notifications\Channel;
 use soareseneves\notifications\Notification;
-use app\models\User;
 
 class EmailChannel extends Channel
 {
@@ -25,7 +24,7 @@ class EmailChannel extends Channel
      */
     public $mailer = 'mailer';
 
-    public $viewPath = '@dektrium/user/views/mail';
+    public $viewPath = '@app/views/notifications/mail';
 
 
     /**
@@ -44,38 +43,32 @@ class EmailChannel extends Channel
      */
     public function send(Notification $notification)
     {
+
         $user_ids = $this->recipients($notification);
 
-        if (!is_null($user_ids)){
-            $fromUser = $notification->user;
-            $notificationData = $notification->getData();
+        foreach ($user_ids as $user_id) {
+            $user = User::find($user_id)->one;
 
-            foreach ($user_ids as $user_id) {
-                $toUser = User::findOne($user_id);
+            $emailParams = $notification->getEmailParams();
 
-                $emailParams = $notification->getEmailParams();
-
-                $modelClass = "app\\models\\" . ucfirst($notificationData['table_name']);
-                $model = $modelClass::find()->where(['id' => $notificationData['table_id']])->one();
-
-                if (isset($emailParams)){
-                    if (is_array($emailParams)){
-                        $emailParams = array_merge($emailParams, ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => $notificationData, 'model' => $model]);
-                    }
-                } else {
-                    $emailParams = ['toUser' => $toUser, 'fromUser' => $fromUser, 'data' => $notificationData, 'model' => $model];
+            if (isset($emailParams)){
+                if (is_array($emailParams)){
+                    $emailParams = array_merge($emailParams, ['user' => $user, 'data' => (object)$notification->getData()]);
                 }
-
-                $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $emailParams);
-
-                Yii::configure($message, $this->message);
-
-                $message->setTo($toUser->email);
-                $message->setSubject($notificationData['title']);
-                $message->setTextBody($notificationData['body']);
-                $message->send($this->mailer);
+            } else {
+                $emailParams = ['user' => $user, 'data' => (object)$notification->getData()];
             }
+
+            $message = $this->mailer->compose(['html' => '@app/views/notifications/mail/' . $notification->getEmailTemplate(), 'text' => '@app/views/notifications/mail/text/' . $notification->getEmailTemplate()], $emailParams);
+
+            Yii::configure($message, $this->message);
+
+            $message->setTo($user->email);
+            $message->setSubject($notificationData['title']);
+            $message->setTextBody($notificationData['body']);
+            $message->send($this->mailer);
         }
+
     }
 
 }
