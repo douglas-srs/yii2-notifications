@@ -48,7 +48,7 @@ class EmailChannel extends Channel
         $user_ids = $this->recipients($notification);
 
         foreach ($user_ids as $user_id) {
-            $user = User::find($user_id)->one;
+            $user = User::findOne($user_id);
 
             $emailParams = $notification->getEmailParams();
 
