@@ -25,7 +25,7 @@ class EmailChannel extends Channel
      */
     public $mailer = 'mailer';
 
-    public $viewPath = '@app/views/notifications/mail';
+    public $viewPath = '@app/mail';
 
 
     /**
