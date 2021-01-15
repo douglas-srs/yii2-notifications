@@ -64,6 +64,8 @@ class EmailChannel extends Channel
 
             Yii::configure($message, $this->message);
 
+            $notificationData = $notification->getData();
+
             $message->setTo($user->email);
             $message->setSubject($notificationData['title']);
             $message->setTextBody($notificationData['body']);
