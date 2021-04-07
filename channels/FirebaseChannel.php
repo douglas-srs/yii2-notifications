@@ -13,10 +13,9 @@ use yii\helpers\ArrayHelper;
 class FirebaseChannel extends Channel
 {
 
-	private function logFile($file, $text){
-		$txt = print_r($text, true) . "\n";
-		fwrite($file, $txt);
-	}
+    private function logError($message){
+        file_put_contents('/home/sigiweb/www/app/runtime/logs/log_notifications_'.date("j.n.Y").'.log', $message . PHP_EOL, FILE_APPEND);
+    }
 
     public function send(Notification $notification)
     {
@@ -47,7 +46,21 @@ class FirebaseChannel extends Channel
 
             $notificationData['url'] = \Yii::$app->urlManager->createAbsoluteUrl(json_decode($notificationData['click_action'], 'https'));
 
-            $service->sendNotification($tokens, ['notification' => $notificationData, 'data' => $notificationData]);
+            $sendData = $service->sendNotification($tokens, ['notification' => $notificationData, 'data' => $notificationData]);
+
+            $tokensToRemove = [];
+
+            if (isset($sendData['results'])){
+                foreach ($sendData['results'] as $tokenIndex => $result) {
+                    if (isset($result['error'])){
+                        $tokensToRemove[] = $tokens[$tokenIndex];
+                    }
+                }
+
+                if (count($tokensToRemove) > 0){
+                    Token::deleteAll(['code' => $tokensToRemove]);
+                }
+            }
         }
 
     }
